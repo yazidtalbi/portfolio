@@ -1,50 +1,502 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Profile from "../components/Profile.jsx";
+import Exemple from "../components/Profile.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+
+import { Image } from "astro:assets";
+
+const projects = [
+  {
+    images: [
+      "./projects/zemium/1.webp",
+      "./projects/zemium/2.jpg",
+      "./projects/zemium/3.png",
+      "./projects/zemium/5.webp",
+    ],
+    title: "Zemium",
+    date: "2024",
+    description:
+      "Zemium is a specialized SAP recruitment firm connecting businesses worldwide with top SAP talent for seamless digital transformation.",
+  },
+  {
+    images: [
+      "./projects/onseek/1.webp",
+      "./projects/onseek/3.jpg",
+      "./projects/onseek/2.webp",
+    ],
+    title: "OnSeek",
+    date: "2024",
+    description:
+      "Onseek is a platform where users request items, get tailored proposals from sellers, and quickly find what they need—no negotiations, just simple, quality connections.",
+  },
+  {
+    images: [
+      "./projects/folklore/1.png",
+      "./projects/folklore/2.png",
+      "./projects/folklore/3.png",
+    ],
+    title: "Folklore 24'",
+    date: "2024",
+    description:
+      "Festival International du Folklore Traditionnel 2024 was a project and promote the celebration of diverse cultural heritage through vibrant traditional performances.",
+  },
+  {
+    images: [
+      "./projects/vf/overview.jpg",
+      "./projects/vf/22.png",
+      "./projects/vf/request.png",
+      "./projects/vf/2.png",
+      "./projects/vf/4.png",
+      "./projects/vf/dashboard1.jpg",
+      "./projects/vf/dashboard2.jpg",
+    ],
+    title: "VisitFootball",
+    date: "2023",
+    description:
+      "VisitFootball's platform was redesigned to connect a global network of football fans with exclusive experiences across Europe.",
+  },
+  {
+    images: [
+      "./projects/pvenergy/1.png",
+      "./projects/pvenergy/2.png",
+      "./projects/pvenergy/3.png",
+    ],
+    title: "PVEnergy",
+    date: "2022",
+    description:
+      "PVEnergy was a Belgian provider specializing in solar panels and green energy solutions.",
+  },
+];
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      .path {
+        pointer-events: none;
+        stroke-dasharray: 2500;
+        animation: dash 12s;
+        animation-direction: reverse;
+        animation-timing-function: ease-in-out;
+        transform: rotate(-90deg);
+      }
+
+      @keyframes dash {
+        to {
+          stroke-dashoffset: 2540;
+        }
+      }
+
+      .sticky-info {
+        height: fit-content;
+        padding: var(--padding);
+        padding-right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: sticky;
+        top: 40;
+        flex-shrink: 0;
+      }
+
+      .specialflex {
+        display: flex;
+      }
+
+      @media (max-width: 1024px) {
+        .specialflex {
+          display: block;
+        }
+      }
+
+      .specialinfo {
+        max-width: 280px;
+        position: unset;
+      }
+
+      @media (max-width: 1024px) {
+        .specialinfo {
+          max-width: none;
+          min-width: none;
+        }
+      }
+
+      .specialmargin {
+        position: sticky;
+      }
+
+      @media (max-width: 1024px) {
+        .specialmargin {
+          margin-top: 30px;
+          position: unset;
+        }
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-gradient-to-b from-[#FBE2FF] to-[#CDD8FC] flex items-center justify-center min-h-screen"
+  >
+    <div
+      class="bg-white h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] md:h-[calc(100vh-4rem)] md:w-[calc(100vw-4rem)] rounded-lg shadow-lg relative overflow-hidden overflow-y-auto"
+    >
+      <!-- Avatar Section Mobile(Bottom Left) -->
+      <div
+        class="md:hidden block relative right-0 items-center space-y-4 bg-white rounded-lg h-auto z-40 p-4 pt-16"
+      >
+        <img src="./yzd.png" alt="Avatar" class="h-36" />
+        <div class="flex space-x-4 items-center">
+          <div>
+            <p class="text-gray-900 font-semibold text-2xl tracking-tight">
+              Yazid Talbi
+            </p>
+            <p class="text-gray-600 text-sm tracking-normal">
+              Product Designer
+            </p>
+          </div>
+          <a href="#contact-form">
+            <button
+              type="button"
+              class="rounded-full bg-indigo-600 p-2 h-10 w-10 items-center text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                ></path>
+              </svg>
+            </button></a
+          >
+        </div>
+      </div>
+
+      <div class="md:hidden block absolute top-0 -right-20 h-auto pr-4 z-50">
+        <img class="w-2/5" src="./sign.svg" alt="Avatar" />
+      </div>
+      <a href="#form">
+        <!-- Avatar Section (Bottom Left) -->
+        <div
+          class="pointer-events-none hidden md:block fixed bottom-8 left-12 items-center space-y-4 p-14 pt-0 bg-white rounded-lg h-auto min-w-[270px] z-40"
+        >
+          <img src="./yzd.png" alt="Avatar" class="h-36" />
+          <div class="flex space-x-4 items-center">
+            <div>
+              <p class="text-gray-900 font-semibold text-2xl tracking-tight">
+                Yazid Talbi
+              </p>
+              <p class="text-gray-600 text-sm tracking-normal">
+                Product Designer
+              </p>
+            </div>
+            <a href="#contact-form" class="pointer-events-auto">
+              <button
+                type="button"
+                class="rounded-full bg-indigo-600 p-2 h-10 w-10 items-center text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                  ></path>
+                </svg>
+              </button></a
+            >
+          </div>
+        </div>
+
+        <div
+          class="hidden md:block fixed top-32 left-0 h-auto min-w-[270px] -ml-10 pointer-events-none"
+        >
+          <svg
+            class="path"
+            width="490"
+            height="195"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            ><mask
+              id="a"
+              style="mask-type:alpha"
+              maskUnits="userSpaceOnUse"
+              x="-10"
+              y="-10"
+              width="500"
+              height="193"
+              ><path
+                d="m483 39-8 18-1 15c0 6 14 8 3 22-8 8-26 21-34 16s-4 0-11-9c-15-18 3-46 10-56l30 78-11 8-16 3-24-30-26-63-12 28c-1 4-4 12-12 13-9 1-20 7-25 12-4 5-27 28-34 31l-20 10 59-13 51-1-3-28-13 4-22 7 6-41s-7-11-14 0c-8 10-16 0-16 0l-23-19-4 10-8 23c-2 1-6 4-10 4-4-1-7-2-7-4v-8l5-21-8 26-11 11c-2 1-8 7-10 7l-9 3 12 2c19-5 52-37 53-37s2 29 0 32l-37 15-58-2-6-24c-1-4 6-13 10-15 5-4 8-11 13-11 3 0 0 10-2 14l-14 9-11 3c-3 0-11 0-11-4 0-5 0-28 4-45 3-14 1-21 2-23l21 7-2 12-8 46 25-74-49 1-3 45c0 6-5 29-11 32-6 4-15 5-18 4l-6-4 7-20c-1 4-5 11-6 11s-3 8-5 8l-13 4c-4 1-10 0-11 5 0 5 2 8 2 9 1 1 8 4 2 15-6 8-37 57-98 46-10-2-21-8-33-14-20-9 24 38 162-45h-18l-26 62-40 16"
+                stroke="red"
+                stroke-width="18"></path></mask
+            ><g mask="url(#a)"
+              ><path
+                d="m116 164-3 6-6 5-6-3-4 3c-2 3-3 4-5 4l-5-2-4-3a231 231 0 0 1 10-10 108 108 0 0 1 7 3l5-4 4-4c5 2 7 3 7 5Zm24-88 4-1h3v13h-3a291 291 0 0 0-10 0l-1 3c0 1 1 2 4 2 2 1 3 3 3 5v2c0 6-5 15-14 26a110 110 0 0 1-78 38c-14 0-27-4-37-11-6-5-9-9-9-12l1-2h1c13 7 29 11 47 11h4a98 98 0 0 0 56-19c14-11 22-20 24-27l-5-2-2-4V87c1-4 4-7 8-10l4-1Zm37 12h-4l-8-2c-4-1-6-2-7-4-4 4-9 6-15 6h-2V75h6l7-1 6-7 5-8 1 1a303 303 0 0 0-4 13c0 2 2 2 5 2h10v13Zm-14 10-3 3-4 2c-3-2-4-5-5-7l8-7 2 4 2 5Zm37-82-2 12-2 17c-1 13-4 24-10 32-4 7-8 11-12 11h-4V75h4c7 0 11-3 14-10l2-19 3-19 6-12 1 1Zm16 72h-4c-5 0-8-2-10-4-2-3-3-6-3-11a249 249 0 0 1 9-61h2c-3 16-5 29-5 41 0 15 2 22 7 22h4v13Zm33-32-2 7c-4 9-8 15-14 19-5 4-13 6-22 6h-1V75h4c3 0 5-4 6-12a1243 1243 0 0 1 5-30 259 259 0 0 1 4-8l1 1v3l-2 4-1 15-2 15 8-9c4-3 7-4 10-4 4 0 6 2 6 6Zm-9 7c0-2-1-3-4-3s-7 4-15 13h1c4 0 8-1 12-4l6-6Zm60 25h-3c-4 0-7-1-9-3-2-1-3-4-4-8l-5 8a568 568 0 0 1-20 8l7-5 11-9c4-4 7-9 9-14a720 720 0 0 1 7-15v1l-1 8-2 7c0 2 0 4 2 6 1 2 3 3 5 3h3v13Zm15-39-4 18c-2 6-5 11-9 16-4 3-6 5-8 5V75h2c3 0 6-1 8-3l1-7 4-9 6-9v2Zm5 44-3 6c-3 2-4 4-6 4l-5-3-3 3-5 3-4-1-4-3a2840 2840 0 0 0 9-9l7 3 4-4 4-4c4 2 6 4 6 5Zm46-30-5 5-6 4-4-5-5-3v-1l11-10c6 4 9 7 9 10Zm11 25h-4l-16 2c-3 2-7 4-10 8a1896 1896 0 0 1-28 26 61 61 0 0 1-24 9l-1-1 4-2 18-11c8-7 15-12 19-17l11-13 13-10c5-3 10-4 14-4h4v13Zm15-39-5 18c-2 6-5 11-9 16-3 3-6 5-8 5V75h2c4 0 6-1 8-3l1-7 4-9 6-9 1 2Zm4 44-3 6-5 4-6-3-3 3-4 3-5-1-3-3a2840 2840 0 0 0 8-9l7 3 4-4 4-4c4 2 6 4 6 5Zm103-63c0 5-2 8-4 9l-10 3-6 6c-4 4-6 7-6 10 0 2 1 3 3 4l6 3c3 2 4 4 4 6 0 9-3 18-10 27-8 14-19 21-31 21-6 0-11-2-15-7s-6-10-6-16l3-22 6-14 6-12 2 1-1 3c-6 13-9 23-9 28 0 8 2 13 6 17s9 6 16 6c5 0 10-2 16-6s10-8 10-12l-6-6c-4-2-6-5-6-7l2-14 7-13 9-11c5-4 8-7 10-7 3 0 4 1 4 3Zm-29 96c0 2-1 4-4 7-2 3-4 4-6 4l-6-3-3 4-5 4-5-2-4-3a365 365 0 0 1 9-11l8 4 4-4 5-5c5 2 7 4 7 5Zm68-116-2 31c0 18-3 32-9 42a19 19 0 0 1-24 8l-3-2 2-1 4-1a91 91 0 0 0 3-32c0-11 2-22 8-32l1 1-2 31-2 17-4 13 6-2 6-5c3-4 5-9 6-17l1-22a63 63 0 0 1 8-30l1 1Zm24 78h-1c-2 0-3 1-5 4-2 9-6 15-9 18l-12 6-10 3-1-1 6-4 12-9c7-6 11-11 11-15l-1-1-9-1-4-4 4-12c3-6 5-9 7-9s4 2 6 4l3 8h3v13Zm30-24-3 6-5 4-7-3c-3 0-5 2-8 6l-5 8c-2 2-4 3-8 3V75h2l8-1 7-7c3-5 6-8 10-10l4-4a53 53 0 0 1 5 11Z"
+                fill="#000"></path></g
+            ></svg
+          >
+        </div>
+
+        <!-- Main Content Section (Right Side with Left Margin) -->
+        <div
+          class="h-full lg:ml-[250px] md:ml-[0px] p-4 lg:pl-16 place-content-center lg:p-16 md:p-0 md:pl-0 lg:max-w-screen-2xl mb-4 lg:mb-0"
+        >
+          <div class="flex space-x-3 items-center mb-6 lg:mb-0">
+            <img class="h-6" src="./sparkle-y.svg" /><h1
+              class="md:block m-0 text-xl lg:text-3xl font-semibold tracking-tight text-gray-700 lg:text-black"
+            >
+              Selected Projects
+            </h1>
+          </div>
+          <!-- Images Section -->
+
+          <div class="w-full divide-y">
+            {
+              projects.map((project, projectIndex) => (
+                <div class="specialflex lg:space-x-7 lg:space-x-reverse lg:place-content-end border-gray-200  animate__animated animate__fadeIn">
+                  <div class="order-1 lg:order-2 lg:sticky lg:top-12 lg:mt-6 md:mt-0 specialmargin mb-8  lg:shrink-0 sticky-info specialinfo">
+                    <h2 class="text-2xl text-gray-900 font-semibold tracking-tight mt-4 md:mt-0">
+                      {project.title}
+                    </h2>
+                    <p class="text-gray-500 mt-0 font-medium tracking-tight">
+                      {project.date}
+                    </p>
+                    <p class="text-gray-700 mt-4 tracking-normal lg:text-base leading-6  text-sm">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  <div class="order-2 lg:order-1 space-y-6 w-full mt-8 mb-8 m-0 ">
+                    {project.images.map((image, index) => (
+                      <img
+                        src={image}
+                        alt={`Image ${index + 1} of ${project.title}`}
+                        class="w-full rounded-lg h-auto "
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+
+          <div>
+            <h1
+              class="md:block m-0 text-xl lg:text-3xl font-semibold tracking-tight text-gray-700 lg:text-black"
+            >
+              Contact
+            </h1>
+            <p
+              class="mb-4 md:mb-8 mt-2 font-normal text-left text-gray-400 md:text-base text-sm"
+            >
+              Let’s talk about how we can craft a user experience <br
+                class="hidden md:block"
+              />that not only looks great but drives real growth for your
+              product.
+            </p>
+
+            <section
+              class="pb-0 lg:pb-6 lg:flex lg:space-x-7 lg:space-x-reverse lg:place-content-end lg:w-4/6 w-6/6"
+              id="contact-form"
+            >
+              <div
+                class="mb-8 m-0 w-full border border-gray-200 p-4 md:p-8 rounded-lg"
+              >
+                <form
+                  class="space-y-8"
+                  action="https://api.web3forms.com/submit"
+                  method="POST"
+                >
+                  <div class="flex flex-col md:flex-row md:space-x-4 mt-0">
+                    <div class="flex-1">
+                      <label
+                        for="full-name"
+                        class="block mb-2 text-sm font-medium text-gray-900"
+                        >Full Name<span class="text-red-500 ml-1">*</span
+                        ></label
+                      >
+                      <input
+                        type="text"
+                        id="full-name"
+                        name="full_name"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+                        placeholder="John Doe"
+                        required
+                      />
+                    </div>
+                    <div class="flex-1">
+                      <label
+                        for="email-address"
+                        class="block mb-2 text-sm font-medium text-gray-900 mt-4 md:mt-0"
+                        >Email<span class="text-red-500 ml-1">*</span></label
+                      >
+                      <input
+                        type="email"
+                        id="email-address"
+                        name="email"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+                        placeholder="example@domain.com"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="md:col-span-2">
+                    <label
+                      for="message"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      >About project<span class="text-red-500 ml-1">*</span
+                      ></label
+                    >
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows="6"
+                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
+                      placeholder="Leave a comment..."
+                      required></textarea>
+                  </div>
+
+                  <!-- Honeypot Spam Protection -->
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    class="hidden"
+                    style="display: none;"
+                  />
+
+                  <input
+                    type="hidden"
+                    name="access_key"
+                    value="19ca72e7-4cbd-446d-86ab-c01c19c5e45d"
+                    class="invisible"
+                  />
+
+                  <div
+                    class="block md:flex lg:space-x-4 space-x-0 place-content-end items-center"
+                  >
+                    <div class="">
+                      <p
+                        class="text-gray-400 text-xs tracking-normal text-center md:text-left mb-4 md:mb-0"
+                      >
+                        I'll get back to you <br
+                          class="hidden md:block"
+                        />within 24 hours
+                      </p>
+                      <div id="result"></div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      class="cursor pointer uppercase text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full px-5 py-2.5 text-center inline-flex items-center w-full md:w-48 justify-center"
+                    >
+                      Send a Message
+                      <svg
+                        class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 14 10"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M1 5h12m0 0L9 1m4 4L9 9"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </section>
+          </div>
+          <!-- Copyright (Bottom Right) -->
+          <div
+            class="lg:fixed lg:bottom-8 lg:right-12 relative bottom-0 mt-8 items-center p-6 lg:p-14 text-center lg:text-right"
+          >
+            <p class="text-gray-500 text-xs tracking-normal min-w-[300px]">
+              Portfolio Designed & Developed <br /> by Yazid Talbi, with 🫖
+            </p>
+          </div>
+        </div>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("form");
+            const result = document.getElementById("result");
+
+            // Hide result message initially
+            result.style.display = "none";
+
+            form.addEventListener("submit", function (e) {
+              e.preventDefault();
+              const formData = new FormData(form);
+              const object = Object.fromEntries(formData);
+              const json = JSON.stringify(object);
+
+              // Show loading message with indigo color
+              result.style.display = "block";
+              result.classList.remove("text-green-500", "text-red-400");
+              result.classList.add("text-indigo-600");
+              result.innerHTML = "Please wait...";
+
+              fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                },
+                body: json,
+              })
+                .then(async (response) => {
+                  let json = await response.json();
+                  result.classList.remove("text-indigo-600"); // Remove loading color
+                  if (response.status == 200) {
+                    result.classList.add("text-green-500"); // Success color
+                    result.innerHTML =
+                      "Your message was submitted successfully";
+                  } else {
+                    result.classList.add("text-red-400"); // Error color
+                    result.innerHTML = json.message;
+                  }
+                })
+                .catch((error) => {
+                  console.log(error);
+                  result.classList.remove("text-indigo-600");
+                  result.classList.add("text-red-400");
+                  result.innerHTML =
+                    "Your message was not submitted. Please try again.";
+                })
+                .finally(() => {
+                  form.reset();
+                  setTimeout(() => {
+                    result.style.display = "none";
+                    result.classList.remove("text-green-500", "text-red-400");
+                  }, 3000);
+                });
+            });
+          });
+        </script>
+      </a>
+    </div>
+  </body>
 </html>
