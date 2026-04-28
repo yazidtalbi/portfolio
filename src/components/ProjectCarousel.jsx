@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
