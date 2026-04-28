@@ -62,8 +62,9 @@
   
   
 body {
-	font-family: 'Inter var', sans-serif;
+	font-family: 'Instrument Sans', sans-serif;
 	font-feature-settings: "cv11";
+	letter-spacing: -0.02em;
 	/* font-family: 'Helvetica Neue', sans-serif;
 	margin: 0;
 	padding: 0;
@@ -75,8 +76,6 @@ body {
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7; */
-	height: 100%;
-    overflow: auto;
 }
 main {
 	width: 720px;
@@ -86,7 +85,6 @@ main {
 }
 
 html {
-    overflow: hidden;
     height: 100%;
 	scroll-behavior: smooth;
 }
