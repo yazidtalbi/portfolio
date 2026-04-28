@@ -64,7 +64,7 @@ export function ProjectCarousel({ images, title }) {
 
       {/* Invisible Click Overlay to trigger next slide */}
       <div 
-        className="absolute inset-0 z-10 cursor-pointer" 
+        className="absolute inset-0 z-10 cursor-pointer carousel-target" 
         onClick={scrollNext}
       />
 
