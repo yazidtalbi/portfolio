@@ -13,12 +13,26 @@ import { Image } from "astro:assets";
 
 const projects = [
   {
+    color: "text-purple-600",
+    images: [
+      "/afusvideo.mp4",
+      "./projects/afus/2.jpg",
+      "./projects/afus/3.jpg",
+      "./projects/afus/4.jpg",
+    ],
+    title: "Afus",
+    date: "2025",
+    purples: ["Brand Identity", "Mobile App Design", "UI/UX Design", "Design System"],
+    description:
+      "Afus is a digital platform dedicated to connecting Morocco's most talented artisans with the world, celebrating traditional craftsmanship through a modern, soul-infused interface.",
+  },
+  {
     color: "text-emerald-800",
     images: [
       "./projects/zemium/1.webp",
       "./projects/zemium/2.jpg",
-      "./projects/zemium/3.png",
-      "./projects/zemium/5.webp",
+      "./projects/zemium/3.jpg",
+      "./projects/zemium/4.jpg",
     ],
     title: "Zemium",
     date: "2024",
@@ -30,43 +44,28 @@ const projects = [
     color: "text-indigo-500",
     purples: ["Brand Identity", "UI/UX Design", "Wireframes", "User Flows"],
     images: [
-      "./projects/onseek/1.webp",
-      "./projects/onseek/2.webp",
+      "./projects/onseek/1.jpg",
+      "./projects/onseek/2.jpg",
       "./projects/onseek/3.jpg",
+      "./projects/onseek/4.jpg",
+      "./projects/onseek/5.webp",
     ],
-    title: "OnSeek",
+    title: "Onseek",
     date: "2025",
     description:
       "Onseek is a platform where users request items, get tailored proposals from sellers, and quickly find what they need—no negotiations, just simple, quality connections.",
   },
   {
-    color: "text-red-400",
-    purples: ["Branding", "Landing Page Design"],
-    images: [
-      "./projects/folklore/1.png",
-      "./projects/folklore/2.png",
-      "./projects/folklore/3.png",
-    ],
-    title: "Folklore 24'",
-    date: "2024",
-    bullets: [
-      "Connect a global network of football fans",
-      "Offer exclusive experiences across Europe",
-      "Streamline the purchase flow for tickets and events",
-    ],
-    description:
-      "Festival International du Folklore Traditionnel 2024 was a project and promote the celebration of diverse cultural heritage through vibrant traditional performances.",
-  },
-  {
     color: "text-blue-600",
     images: [
-      "./projects/vf/overview.jpg",
-      "./projects/vf/22.png",
-      "./projects/vf/request.png",
-      "./projects/vf/2.png",
-      "./projects/vf/4.webp",
-      "./projects/vf/dashboard1.webp",
-      "./projects/vf/dashboard2.webp",
+      "./projects/vf/1.jpg",
+      "./projects/vf/2.jpg",
+      "./projects/vf/3.jpg",
+      "./projects/vf/4.jpg",
+      "./projects/vf/5.jpg",
+      "./projects/vf/6.jpg",
+      "./projects/vf/7.webp",
+      "./projects/vf/8.jpg",
     ],
     title: "VisitFootball",
     date: "2024",
@@ -85,6 +84,33 @@ const projects = [
       "Offer exclusive experiences across Europe",
       "Streamline the purchase flow for tickets and events",
     ],
+  },
+  {
+    color: "text-slate-600",
+    images: [
+      "./projects/allied/1.jpg",
+      "./projects/allied/X.jpg",
+      "./projects/allied/3.jpg",
+      "./projects/allied/4.jpg",
+    ],
+    title: "Allied",
+    date: "2025",
+    purples: ["Web Design", "UX Strategy", "Brand Identity"],
+    description:
+      "Allied Home is a leader in sustainable home textiles, focused on developing innovative fabrics and fills for the modern home.",
+  },
+  {
+    color: "text-red-400",
+    purples: ["Branding", "Landing Page Design"],
+    images: [
+      "./projects/folklore/1.png",
+      "./projects/folklore/2.png",
+      "./projects/folklore/3.png",
+    ],
+    title: "Folklore",
+    date: "2024",
+    description:
+      "Festival International du Folklore Traditionnel 2024 was a project and promote the celebration of diverse cultural heritage through vibrant traditional performances.",
   },
   {
     color: "text-yellow-700",
@@ -106,7 +132,7 @@ const projects = [
       "./projects/pvenergy/2.png",
       "./projects/pvenergy/3.png",
     ],
-    title: "PVEnergy",
+    title: "PVE",
     date: "2022",
     purples: ["Branding", "Landing Page Design"],
     description:
@@ -114,12 +140,42 @@ const projects = [
   },
   {
     color: "text-red-500",
-    images: ["./projects/knockout/knockout-social.jpg"],
+    images: [
+      "./projects/knockout/knockout-social.jpg",
+      "./projects/knockout/2.jpg",
+      "./projects/knockout/3.jpg",
+      "./projects/knockout/4.jpg",
+    ],
     title: "Knockout",
     date: "2025",
     purples: ["Social Media Assets", "Flyer Design"],
     description:
       "Knockout is a volleyball tournament that benefits Bonei Olam Florida to fund treatments for local Florida couples struggling with infertility.",
+  },
+  {
+    color: "text-amber-800",
+    images: [
+      "./projects/casablanca/1.jpg",
+      "./projects/casablanca/2.jpg",
+      "./projects/casablanca/3.jpg",
+    ],
+    title: "Casablanca",
+    date: "2024",
+    purples: ["Digital Experience", "UI/UX Design", "Virtual Tour"],
+    description:
+      "A sophisticated digital experience for Le Casablanca Hotel, featuring an immersive virtual tour and reservation system for its refined dining venues.",
+  },
+  {
+    color: "text-black",
+    images: [
+      "./projects/masterpiece/1.jpg",
+      "./projects/masterpiece/2.jpg",
+    ],
+    title: "The mxsterpiece",
+    date: "2025",
+    purples: ["Studio Branding", "Web Design", "Portfolio Design"],
+    description:
+      "The Masterpiece is a London-based product design studio dedicated to crafting high-end digital experiences and avant-garde design solutions.",
   },
 ];
 ---
@@ -231,6 +287,11 @@ const projects = [
         }
       }
 
+      /* Dialog Cursor Fix */
+      dialog, dialog * {
+        cursor: auto !important;
+      }
+
       .cursor-hover {
         transform: scale(2.5);
         mix-blend-mode: difference;
@@ -258,14 +319,25 @@ const projects = [
         transform: translateY(-50%) translateX(-10px);
       }
 
+      .custom-cursor.carousel-active {
+        background-color: white;
+        mix-blend-mode: difference;
+        transform: scale(1.2);
+      }
+
       .custom-cursor.carousel-active .cursor-chevron {
         opacity: 1;
-        transform: translateY(-50%) translateX(0);
+        color: white;
       }
-      
-      .custom-cursor.carousel-active {
-        background-color: black;
-        transform: scale(0.8);
+
+      .custom-cursor.carousel-active .cursor-chevron.left {
+        left: -24px;
+        transform: translateY(-50%);
+      }
+
+      .custom-cursor.carousel-active .cursor-chevron.right {
+        right: -24px;
+        transform: translateY(-50%);
       }
 
       /* Lenis Scroll Base */
@@ -282,10 +354,38 @@ const projects = [
         overflow: hidden;
       }
 
+      /* Hide scrollbars globally */
+      html, body {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+      }
+      
+      html::-webkit-scrollbar, body::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
+
       /* Hide horizontal overflow globally */
       body {
         overflow-x: hidden;
         width: 100%;
+      }
+
+      /* Modal Animations */
+      dialog[open] {
+        animation: modal-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      dialog::backdrop {
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        animation: backdrop-in 0.4s ease;
+      }
+      @keyframes modal-in {
+        from { opacity: 0; transform: translateY(20px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      @keyframes backdrop-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
     </style>
   </head>
@@ -303,9 +403,19 @@ const projects = [
     </div>
     
     <div
-      class="relative w-full"
       id="main-content"
     >
+      <!-- Custom Scrollbar -->
+      <div 
+        id="scrollbar-container" 
+        class="fixed right-2 top-4 bottom-4 w-1 z-[1000] opacity-0 transition-opacity duration-500 pointer-events-none"
+      >
+        <div class="absolute inset-0 bg-black/[0.03] rounded-full"></div>
+        <div 
+          id="scrollbar-thumb" 
+          class="absolute top-0 w-full bg-black/20 rounded-full"
+        ></div>
+      </div>
 
 
 
@@ -332,13 +442,14 @@ const projects = [
           <div class="w-full divide-y">
             {
               projects.map((project, projectIndex) => (
-                <div class="w-full">
+                <div class="w-full project-row opacity-0">
                   <div class="px-4 lg:px-16 mx-auto lg:max-w-screen-2xl">
-                    <div class="specialflex lg:space-x-7 lg:space-x-reverse lg:place-content-end animate__animated animate__fadeIn">
+                    <div class="specialflex lg:space-x-7 lg:space-x-reverse lg:place-content-end">
                   <div class="order-1 lg:order-2 lg:sticky lg:top-12 lg:mt-6 md:mt-0 specialmargin mb-8  lg:shrink-0 sticky-info specialinfo">
                     <h2
-                      class={`text-2xl ${project.color} font-semibold tracking-tight mt-4 md:mt-0`}
+                      class={`text-2xl ${project.color} font-semibold tracking-tight mt-4 md:mt-0 flex items-center gap-2`}
                     >
+                      <span>✦</span>
                       {project.title}
                     </h2>
                     <p
@@ -375,18 +486,41 @@ const projects = [
                         project.bullets.map((item) => <li>{item}</li>)}
                     </ul>
 
-                    <p class="text-gray-400 text-sm mt-8 font-medium tracking-tight">
-                      <span class="mr-1 text-gray-500">✦</span> Services
+                    <p class="text-gray-400 text-[10px] uppercase tracking-widest mt-8 font-bold">
+                      Services
                     </p>
 
                     <div class="flex flex-wrap gap-2 gap-x-1 mt-3 mb-2">
                       {project.purples &&
                         project.purples.map((purple) => (
-                          <span class="bg-purple-100 text-purple-800 text-base font-medium px-3 py-1 rounded-full">
+                          <span class="bg-transparent text-gray-500 text-[11px] font-semibold px-3 py-1 rounded-full border border-gray-200">
                             {purple}
                           </span>
                         ))}
                     </div>
+
+
+
+                    <div class="w-full h-px bg-gray-100 mt-12 lg:mt-24 mb-8"></div>
+
+                    <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-4">
+                      Ready to collaborate on something similar?
+                    </p>
+
+                    <button class="open-contact-modal relative flex items-center w-full max-w-[180px] rounded-full overflow-hidden transition-all group">
+                      <img src="/gradient.png" alt="" class="absolute inset-0 w-full h-full object-cover scale-x-[-1] opacity-80 group-hover:opacity-100 transition-opacity" />
+                      <div class="relative z-10 flex items-center justify-between w-full p-2 pl-3">
+                        <div class="flex items-center gap-2">
+                          <img src="/enhanced.png" alt="Yazid" class="w-6 h-6 rounded-full object-cover border border-white/20" />
+                          <span class="text-[10px] font-bold uppercase tracking-widest text-gray-800">Contact me</span>
+                        </div>
+                        <div class="group-hover:translate-x-0.5 transition-transform shrink-0 pr-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="black" class="w-2.5 h-2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                          </svg>
+                        </div>
+                      </div>
+                    </button>
                   </div>
 
                   <div class="order-2 lg:order-1 w-full mt-8 mb-8 m-0">
@@ -405,140 +539,91 @@ const projects = [
 
           <div class="px-4 lg:px-16 mx-auto lg:max-w-screen-2xl">
 
-          <div class="py-10 flex flex-col items-center text-center">
-            <h1
-              class="md:block m-0 text-xl lg:text-3xl font-semibold tracking-tight text-gray-700 lg:text-black"
-            >
-              Contact
-            </h1>
-            <p
-              class="mb-4 md:mb-8 mt-2 font-normal text-gray-400 md:text-md text-md max-w-xl"
-            >
-              Let’s talk about how we can craft a user experience <br
-                class="hidden md:block"
-              />that not only looks great but drives real growth for your
-              product.
-            </p>
+            <div class="py-20 flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+              <span>2026. Yazid Talbi.</span>
+            </div>
+          </div>
+        </div>
 
-            <section
-              class="pb-0 lg:pb-6 w-full max-w-3xl"
-              id="contact-form"
+        <!-- Contact Modal -->
+        <dialog id="contact-modal" class="p-0 rounded-3xl bg-white border-none shadow-2xl max-w-2xl w-[calc(100%-2rem)] md:w-full outline-none">
+          <div class="relative p-8 md:p-12">
+            <button id="close-contact-modal" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-black transition-colors rounded-full hover:bg-gray-100">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+            
+            <div class="mb-10">
+              <h2 class="text-3xl font-bold tracking-tight text-black mb-2">Let's build something great</h2>
+              <p class="text-gray-500">Tell me about your project and I'll get back to you within 24 hours.</p>
+            </div>
+
+            <form
+              id="form"
+              class="space-y-6"
+              action="https://api.web3forms.com/submit"
+              method="POST"
             >
-              <div
-                class="mb-8 m-0 w-full border border-gray-200 p-4 md:p-8 rounded-lg"
-              >
-                <form
-                  class="space-y-8"
-                  action="https://api.web3forms.com/submit"
-                  method="POST"
-                >
-                  <div class="flex flex-col md:flex-row md:space-x-4 mt-0">
-                    <div class="flex-1">
-                      <label
-                        for="full-name"
-                        class="block mb-2 text-sm font-medium text-gray-900"
-                        >Full Name<span class="text-red-500 ml-1">*</span
-                        ></label
-                      >
-                      <input
-                        type="text"
-                        id="full-name"
-                        name="full_name"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
-                        placeholder="John Doe"
-                        required
-                      />
-                    </div>
-                    <div class="flex-1">
-                      <label
-                        for="email-address"
-                        class="block mb-2 text-sm font-medium text-gray-900 mt-4 md:mt-0"
-                        >Email<span class="text-red-500 ml-1">*</span></label
-                      >
-                      <input
-                        type="email"
-                        id="email-address"
-                        name="email"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
-                        placeholder="example@domain.com"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div class="md:col-span-2">
-                    <label
-                      for="message"
-                      class="block mb-2 text-sm font-medium text-gray-900"
-                      >About project<span class="text-red-500 ml-1">*</span
-                      ></label
-                    >
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows="6"
-                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
-                      placeholder="Describe your project..."
-                      required></textarea>
-                  </div>
-
-                  <!-- Honeypot Spam Protection -->
+              <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+                <div class="flex-1">
+                  <label for="full-name" class="block mb-2 text-sm font-medium text-gray-900">Full Name</label>
                   <input
-                    type="checkbox"
-                    name="botcheck"
-                    class="hidden"
-                    style="display: none;"
+                    type="text"
+                    id="full-name"
+                    name="full_name"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-black focus:border-transparent transition-all outline-none"
+                    placeholder="John Doe"
+                    required
                   />
-
+                </div>
+                <div class="flex-1">
+                  <label for="email-address" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
                   <input
-                    type="hidden"
-                    name="access_key"
-                    value="19ca72e7-4cbd-446d-86ab-c01c19c5e45d"
-                    class="invisible"
+                    type="email"
+                    id="email-address"
+                    name="email"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-black focus:border-transparent transition-all outline-none"
+                    placeholder="example@domain.com"
+                    required
                   />
-
-                  <div
-                    class="block md:flex lg:space-x-4 space-x-0 justify-center items-center"
-                  >
-                    <div class="">
-                      <p
-                        class="text-gray-400 text-xs tracking-normal text-center md:text-left mb-4 md:mb-0"
-                      >
-                        I'll get back to you <br
-                          class="hidden md:block"
-                        />within 24 hours
-                      </p>
-                      <div id="result"></div>
-                    </div>
-
-                    <button
-                      type="submit"
-                      class="cursor pointer uppercase text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full px-5 py-2.5 text-center inline-flex items-center w-full md:w-48 justify-center"
-                    >
-                      Send a Message
-                      <svg
-                        class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 14 10"
-                      >
-                        <path
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M1 5h12m0 0L9 1m4 4L9 9"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </form>
+                </div>
               </div>
-            </section>
+
+              <div>
+                <label for="message" class="block mb-2 text-sm font-medium text-gray-900">About the project</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-black focus:border-transparent transition-all outline-none resize-none"
+                  placeholder="Tell me a bit about what you're working on..."
+                  required></textarea>
+              </div>
+
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+              <input type="hidden" name="access_key" value="19ca72e7-4cbd-446d-86ab-c01c19c5e45d" />
+
+              <div class="flex flex-col md:flex-row items-center justify-between gap-6 pt-4">
+                <div id="result" class="text-sm font-medium"></div>
+                <button
+                  type="submit"
+                  class="w-full md:w-auto px-10 py-4 bg-black text-white rounded-full font-bold uppercase text-[10px] tracking-widest hover:bg-gray-900 transition-all flex items-center justify-center gap-2"
+                >
+                  Send Message
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3 h-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </div>
+        </dialog>
           </div>
         </div>
 
         <script>
+          import { animate, inView } from 'framer-motion';
           import Lenis from 'lenis';
 
           document.addEventListener("DOMContentLoaded", function () {
@@ -546,6 +631,11 @@ const projects = [
             const lenis = new Lenis({
               duration: 1.2,
               easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+              orientation: 'vertical',
+              gestureOrientation: 'vertical',
+              smoothWheel: true,
+              wheelMultiplier: 1,
+              touchMultiplier: 2,
             });
 
             function raf(time) {
@@ -554,6 +644,48 @@ const projects = [
             }
 
             requestAnimationFrame(raf);
+
+            // Custom Scrollbar Logic
+            const scrollbar = document.getElementById('scrollbar-container');
+            const thumb = document.getElementById('scrollbar-thumb');
+            let scrollTimeout;
+
+            lenis.on('scroll', ({ scroll, limit, progress }) => {
+              if (!scrollbar || !thumb) return;
+              
+              // Show scrollbar
+              scrollbar.style.opacity = '1';
+              
+              // Calculate thumb size and position
+              const trackHeight = scrollbar.offsetHeight;
+              const viewportHeight = window.innerHeight;
+              const contentHeight = limit + viewportHeight;
+              
+              // Ensure thumb is at least 40px
+              const thumbHeight = Math.max((viewportHeight / contentHeight) * trackHeight, 40);
+              const thumbY = progress * (trackHeight - thumbHeight);
+              
+              thumb.style.height = `${thumbHeight}px`;
+              thumb.style.transform = `translateY(${thumbY}px)`;
+              
+              // Hide scrollbar after 1.5s of inactivity
+              clearTimeout(scrollTimeout);
+              scrollTimeout = setTimeout(() => {
+                scrollbar.style.opacity = '0';
+              }, 1500);
+            });
+
+            // Project Reveal Animation
+            const projects = document.querySelectorAll('.project-row');
+            projects.forEach((project) => {
+              inView(project, () => {
+                animate(
+                  project,
+                  { opacity: 1, y: [40, 0] },
+                  { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }
+                );
+              });
+            });
 
             // Custom Cursor
             const cursor = document.getElementById('cursor');
@@ -578,6 +710,34 @@ const projects = [
               });
             });
 
+            // Modal Logic
+            const modal = document.getElementById('contact-modal');
+            const openButtons = document.querySelectorAll('.open-contact-modal');
+            const closeButton = document.getElementById('close-contact-modal');
+            const customCursor = document.getElementById('cursor');
+
+            openButtons.forEach(btn => {
+              btn.addEventListener('click', () => {
+                modal.showModal();
+                document.body.style.overflow = 'hidden';
+                if (customCursor) customCursor.style.opacity = '0';
+              });
+            });
+
+            closeButton.addEventListener('click', () => {
+              modal.close();
+              document.body.style.overflow = '';
+              if (customCursor) customCursor.style.opacity = '1';
+            });
+
+            modal.addEventListener('click', (e) => {
+              if (e.target === modal) {
+                modal.close();
+                document.body.style.overflow = '';
+                if (customCursor) customCursor.style.opacity = '1';
+              }
+            });
+
             const form = document.getElementById("form");
             const result = document.getElementById("result");
 
@@ -590,11 +750,11 @@ const projects = [
                 const object = Object.fromEntries(formData);
                 const json = JSON.stringify(object);
 
-                // Show loading message with indigo color
+                // Show loading message
                 result.style.display = "block";
                 result.classList.remove("text-green-500", "text-red-400");
                 result.classList.add("text-indigo-600");
-                result.innerHTML = "Please wait...";
+                result.innerHTML = "Sending...";
 
                 fetch("https://api.web3forms.com/submit", {
                   method: "POST",
@@ -606,13 +766,17 @@ const projects = [
                 })
                   .then(async (response) => {
                     let json = await response.json();
-                    result.classList.remove("text-indigo-600"); // Remove loading color
+                    result.classList.remove("text-indigo-600");
                     if (response.status == 200) {
-                      result.classList.add("text-green-500"); // Success color
-                      result.innerHTML =
-                        "Your message was submitted successfully";
+                      result.classList.add("text-green-500");
+                      result.innerHTML = "Message sent successfully!";
+                      setTimeout(() => {
+                        modal.close();
+                        document.body.style.overflow = '';
+                        form.reset();
+                      }, 1500);
                     } else {
-                      result.classList.add("text-red-400"); // Error color
+                      result.classList.add("text-red-400");
                       result.innerHTML = json.message;
                     }
                   })
@@ -620,15 +784,7 @@ const projects = [
                     console.log(error);
                     result.classList.remove("text-indigo-600");
                     result.classList.add("text-red-400");
-                    result.innerHTML =
-                      "Your message was not submitted. Please try again.";
-                  })
-                  .finally(() => {
-                    form.reset();
-                    setTimeout(() => {
-                      result.style.display = "none";
-                      result.classList.remove("text-green-500", "text-red-400");
-                    }, 3000);
+                    result.innerHTML = "Something went wrong. Please try again.";
                   });
               });
             }
@@ -637,4 +793,5 @@ const projects = [
       </div>
     </div>
   </body>
+</html>
 </html>
