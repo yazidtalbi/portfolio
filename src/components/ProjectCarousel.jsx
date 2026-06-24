@@ -93,7 +93,16 @@ export function ProjectCarousel({ images, title }) {
   }, [emblaApi])
 
   const onImageLoad = useCallback(() => {
-    if (emblaApi) emblaApi.reInit()
+    if (!emblaApi) return;
+    const slides = emblaApi.slideNodes();
+    const index = emblaApi.selectedScrollSnap();
+    const activeSlide = slides[index];
+    if (activeSlide) {
+      const height = activeSlide.scrollHeight;
+      if (height > 0) {
+        emblaApi.rootNode().style.height = `${height}px`;
+      }
+    }
   }, [emblaApi])
 
   return (
@@ -153,7 +162,7 @@ export function ProjectCarousel({ images, title }) {
                       userSelect: 'none',
                       pointerEvents: 'none'
                     }}
-                    loading="eager" // Load immediately to help height calculation
+                    loading="lazy" // Lazy load images to prevent sluggishness
                     onError={(e) => {
                       e.currentTarget.src = 'https://placehold.co/600x400?text=Image+Not+Found';
                     }}

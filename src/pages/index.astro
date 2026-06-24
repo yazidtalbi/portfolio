@@ -691,9 +691,20 @@ const projects = [
             const cursor = document.getElementById('cursor');
             const links = document.querySelectorAll('a, button, .cursor-pointer');
 
+            let mouseX = 0;
+            let mouseY = 0;
+            let isTicking = false;
             document.addEventListener('mousemove', (e) => {
-              cursor.style.left = e.clientX + 'px';
-              cursor.style.top = e.clientY + 'px';
+              mouseX = e.clientX;
+              mouseY = e.clientY;
+              if (!isTicking) {
+                requestAnimationFrame(() => {
+                  cursor.style.left = mouseX + 'px';
+                  cursor.style.top = mouseY + 'px';
+                  isTicking = false;
+                });
+                isTicking = true;
+              }
             });
 
             links.forEach(link => {
