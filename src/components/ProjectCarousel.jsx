@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useEffect } from 'react'
+import React, { useCallback, useRef, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import AutoHeight from 'embla-carousel-auto-height'
 import { clsx } from 'clsx'
@@ -55,6 +55,27 @@ export function ProjectCarousel({ images, title }) {
     duration: 30, // Slightly slower transition for smoothness
   })
 
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [scrollSnaps, setScrollSnaps] = useState([])
+
+  const onInit = useCallback((emblaApi) => {
+    setScrollSnaps(emblaApi.scrollSnapList())
+  }, [])
+
+  const onSelect = useCallback((emblaApi) => {
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+  }, [])
+
+  useEffect(() => {
+    if (!emblaApi) return
+
+    onInit(emblaApi)
+    onSelect(emblaApi)
+    emblaApi.on('reInit', onInit)
+    emblaApi.on('reInit', onSelect)
+    emblaApi.on('select', onSelect)
+  }, [emblaApi, onInit, onSelect])
+
   // Manual height synchronization
   useEffect(() => {
     if (!emblaApi) return;
@@ -106,81 +127,101 @@ export function ProjectCarousel({ images, title }) {
   }, [emblaApi])
 
   return (
-    <div
-      className="relative group overflow-hidden bg-white border border-gray-100"
-      style={{ isolation: 'isolate' }}
-    >
-      {/* Embla Viewport */}
+    <div className="flex flex-col w-full">
       <div
-        ref={emblaRef}
-        style={{ 
-          overflow: 'hidden', 
-          width: '100%',
-          transition: 'height 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-          willChange: 'height'
-        }}
+        className="relative group overflow-hidden bg-white border border-gray-100"
+        style={{ isolation: 'isolate' }}
       >
-        {/* Embla Container */}
+        {/* Embla Viewport */}
         <div
+          ref={emblaRef}
           style={{ 
-            display: 'flex', 
-            touchAction: 'pan-y', 
-            width: '100%', 
-            alignItems: 'flex-start'
+            overflow: 'hidden', 
+            width: '100%',
+            transition: 'height 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+            willChange: 'height'
           }}
         >
-          {images && images.map((src, index) => {
-            const isVideo = src.toLowerCase().endsWith('.mp4');
-            return (
-              /* Embla Slide */
-              <div
-                key={index}
-                style={{
-                  flex: '0 0 100%',
-                  minWidth: '100%',
-                  maxWidth: '100%',
-                  position: 'relative',
-                  height: 'auto'
-                }}
-              >
-                {isVideo ? (
-                  <VideoSlide 
-                    src={src} 
-                    onLoadedData={onImageLoad} 
-                    title={title} 
-                    index={index} 
-                  />
-                ) : (
-                  <img
-                    src={src}
-                    alt={`Media ${index + 1} of ${title}`}
-                    onLoad={onImageLoad}
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      display: 'block',
-                      userSelect: 'none',
-                      pointerEvents: 'none'
-                    }}
-                    loading="lazy" // Lazy load images to prevent sluggishness
-                    onError={(e) => {
-                      e.currentTarget.src = 'https://placehold.co/600x400?text=Image+Not+Found';
-                    }}
-                  />
-                )}
-              </div>
-            );
-          })}
+          {/* Embla Container */}
+          <div
+            style={{ 
+              display: 'flex', 
+              touchAction: 'pan-y', 
+              width: '100%', 
+              alignItems: 'flex-start'
+            }}
+          >
+            {images && images.map((src, index) => {
+              const isVideo = src.toLowerCase().endsWith('.mp4');
+              return (
+                /* Embla Slide */
+                <div
+                  key={index}
+                  style={{
+                    flex: '0 0 100%',
+                    minWidth: '100%',
+                    maxWidth: '100%',
+                    position: 'relative',
+                    height: 'auto'
+                  }}
+                >
+                  {isVideo ? (
+                    <VideoSlide 
+                      src={src} 
+                      onLoadedData={onImageLoad} 
+                      title={title} 
+                      index={index} 
+                    />
+                  ) : (
+                    <img
+                      src={src}
+                      alt={`Media ${index + 1} of ${title}`}
+                      onLoad={onImageLoad}
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                        display: 'block',
+                        userSelect: 'none',
+                        pointerEvents: 'none'
+                      }}
+                      loading="eager" // Load immediately to help height calculation
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://placehold.co/600x400?text=Image+Not+Found';
+                      }}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
+
+        {/* Invisible Click Overlay to trigger next slide */}
+        <div
+          className="absolute inset-0 z-10 cursor-pointer carousel-target"
+          onClick={scrollNext}
+        />
       </div>
 
-      {/* Invisible Click Overlay to trigger next slide */}
-      <div
-        className="absolute inset-0 z-10 cursor-pointer carousel-target"
-        onClick={scrollNext}
-      />
-
-
+      {/* Progress Dots (Mobile only) */}
+      {scrollSnaps.length > 1 && (
+        <div className="flex lg:hidden justify-center gap-1.5 mt-3 relative z-20">
+          {scrollSnaps.map((_, index) => (
+            <button
+              key={index}
+              className={cn(
+                "w-1.5 h-1.5 rounded-full transition-all duration-300",
+                index === selectedIndex ? "bg-black w-3" : "bg-gray-300"
+              )}
+              onClick={(e) => {
+                e.stopPropagation();
+                emblaApi && emblaApi.scrollTo(index);
+              }}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

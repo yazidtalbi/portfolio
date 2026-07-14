@@ -458,6 +458,14 @@ const projects = [
                       {project.date}
                     </p>
 
+                    <div class="block lg:hidden w-full mt-6 mb-6">
+                      <ProjectCarousel 
+                        client:load 
+                        images={project.images} 
+                        title={project.title} 
+                      />
+                    </div>
+
                     {/* <div class="mt-4">
                       <button
                         type="button"
@@ -523,7 +531,7 @@ const projects = [
                     </button>
                   </div>
 
-                  <div class="order-2 lg:order-1 w-full mt-8 mb-8 m-0">
+                  <div class="hidden lg:block order-2 lg:order-1 w-full mt-8 mb-8 m-0">
                     <ProjectCarousel 
                       client:load 
                       images={project.images} 
